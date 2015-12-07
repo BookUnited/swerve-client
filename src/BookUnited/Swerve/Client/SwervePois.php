@@ -5,26 +5,17 @@ namespace BookUnited\Swerve\Client;
 use GuzzleHttp\Client;
 
 /**
- * Class SwerveClient
+ * Class SwervePois
  * @package BookUnited\Swerve\Client
  */
-class SwervePois {
-
+class SwervePois extends SwerveClient
+{
     /**
-     * @var Client
+     * @param $lat
+     * @param $lng
+     * @param array $options
      */
-    protected $client;
-
-    /**
-     * SwervePois constructor.
-     * @param Client $client
-     */
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
-    public function get($lat, $lng, array $options = [])
+    public function find($lat, $lng, array $options = [])
     {
         $query = ['near' => sprintf("%s,%s", $lat, $lng)];
 
@@ -36,12 +27,9 @@ class SwervePois {
             $query['max'] = $options['max'];
         }
 
-        $this->client->get(sprintf('%s/api/v1/poi', config('swerve.api_url')), [
-            'headers' => [
-                'Api-Key' => config('swerve.api_key')
-            ],
-            'query' => $query
-        ]);
+        $response = $this->get(sprintf('%s/api/v1/poi', config('swerve.api_url')), $query);
+
+        return $response;
     }
 
 }
