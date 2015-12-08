@@ -34,7 +34,7 @@ class SwervePois extends SwerveClient
         // $pois['data'];
         $pois = array_map(function($poi) {
             return new Poi([
-                'id'            => $poi['id']
+                'id'            => $poi['id'],
                 'name'          => $poi['attributes']['name'],
                 'description'   => $poi['attributes']['description'],
                 'address'       => $poi['attributes']['address'],
