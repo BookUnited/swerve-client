@@ -6,7 +6,7 @@ namespace BookUnited\Swerve\Client;
  * Class Poi
  * @package BookUnited\Swerve\Client
  */
-class Poi {
+class Poi extends Entity {
 
     /**
      * @var
@@ -29,15 +29,9 @@ class Poi {
     protected $zip_code;
 
     /**
-     * Poi constructor.
-     * @param array $attributes
+     * @var
      */
-    public function __construct(array $attributes)
-    {
-        foreach(array_keys(get_class_vars(self::class)) as $name) {
-            $this->$name = array_get($attributes, $name);
-        }
-    }
+    protected $images;
 
     /**
      * @return mixed
@@ -69,6 +63,14 @@ class Poi {
     public function getZipCode()
     {
         return $this->zip_code;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 
 }

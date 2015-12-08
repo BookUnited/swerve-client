@@ -34,7 +34,7 @@ class SwervePois extends SwerveClient
         $pois = new Collection();
 
         foreach($results['data'] as $attributes) {
-            $pois->push($this->toEntity($attributes, []));
+            $pois->push($this->toEntity($attributes, array_get($results, 'included', [])));
         }
 
         return $pois->reverse();
@@ -44,15 +44,45 @@ class SwervePois extends SwerveClient
      * @param array $attributes
      * @return Poi
      */
-    private function toEntity(array $attributes, array $includes)
+    private function toEntity(array $attributes, array $included)
     {
-        return new Poi([
+        $poi = [
             'id'            => $attributes['id'],
             'name'          => $attributes['attributes']['name'],
             'description'   => $attributes['attributes']['description'],
             'address'       => $attributes['attributes']['address'],
-            'zip_code'      => $attributes['attributes']['zip_code']
-        ]);
+            'zip_code'      => $attributes['attributes']['zip_code'],
+            'images'        => new Collection()
+        ];
+
+        foreach(array_get($attributes, 'images.data', []) as $image) {
+            $image = $this->getInclude($included, 'image', $image['id']);
+
+            if ($image) {
+                $poi['images']->push(new PoiImage([
+                    'url' => $image['attributes']['url']
+                ]));
+            }
+        }
+
+        return new Poi($poi);
+    }
+
+    /**
+     * @param array $included
+     * @param $type
+     * @param $id
+     * @return bool
+     */
+    private function getInclude(array $included, $type, $id)
+    {
+        foreach($included as $include) {
+            if ($include['type'] == $type && $include['id'] == $id) {
+                return $include;
+            }
+        }
+
+        return false;
     }
 
 }
