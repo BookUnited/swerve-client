@@ -2,7 +2,6 @@
 
 namespace BookUnited\Swerve\Client;
 
-use GuzzleHttp\Client;
 use Illuminate\Support\Collection;
 
 /**
@@ -23,6 +22,10 @@ class SwervePois extends SwerveClient
 
         if (array_has($options, 'with') && is_array($options['with'])) {
             $query['with'] = implode(',', $options['with']);
+        }
+
+        if (array_has($options, 'include') && is_array($options['include'])) {
+            $query['include'] = implode(',', $options['include']);
         }
 
         if (array_has($options, 'max') && ctype_digit($options['max'])) {
