@@ -28,17 +28,18 @@ abstract class SwerveClient
     /**
      * @param $url
      * @param array $query
+     * @return mixed
      */
     protected function get($url, array $query = [])
     {
-        $response = $this->client->get($url, config('swerve.api_url')), [
+        $response = $this->client->get($url, [
             'headers' => [
                 'Api-Key' => config('swerve.api_key')
             ],
             'query'   => $query
         ]);
 
-        return $response->getBody()->getContents();
+        return $response->json();
     }
 
 }
