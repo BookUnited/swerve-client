@@ -31,18 +31,24 @@ class SwervePois extends SwerveClient
 
         $results = $this->get(sprintf('%s/api/v1/poi', config('swerve.api_url')), $query);
 
-        // $pois['data'];
-        $pois = array_map(function($poi) {
-            return new Poi([
-                'id'            => $poi['id'],
-                'name'          => $poi['attributes']['name'],
-                'description'   => $poi['attributes']['description'],
-                'address'       => $poi['attributes']['address'],
-                'zip_code'      => $poi['attributes']['zip_code']
-            ]);
-        }, $results['data']);
+        $pois = array_reverse(array_map([$this, 'toEntity'], $results['data']));
 
         return new Collection($pois);
+    }
+
+    /**
+     * @param array $attributes
+     * @return Poi
+     */
+    private function toEntity(array $attributes)
+    {
+        return new Poi([
+            'id'            => $attributes['id'],
+            'name'          => $attributes['attributes']['name'],
+            'description'   => $attributes['attributes']['description'],
+            'address'       => $attributes['attributes']['address'],
+            'zip_code'      => $attributes['attributes']['zip_code']
+        ]);
     }
 
 }
