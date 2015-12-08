@@ -34,7 +34,7 @@ class Poi {
      */
     public function __construct(array $attributes)
     {
-        foreach(array_keys(get_class_vars($this)) as $name) {
+        foreach(array_keys(get_class_vars(self::class)) as $name) {
             $this->$name = array_get($attributes, $name);
         }
     }
