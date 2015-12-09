@@ -36,7 +36,7 @@ class SwervePois extends SwerveClient
 
         $pois = new Collection();
 
-        foreach($results['data'] as $attributes) {
+        foreach(array_get($results, 'data', []) as $attributes) {
             $pois->push($this->toEntity($attributes, array_get($results, 'included', [])));
         }
 
@@ -61,11 +61,11 @@ class SwervePois extends SwerveClient
         foreach(array_get($attributes, 'images.data', []) as $image) {
             $image = $this->getInclude($included, 'image', $image['id']);
 
-            if ($image) {
-                $poi['images']->push(new PoiImage([
-                    'url' => $image['attributes']['url']
-                ]));
-            }
+            if (!$image) continue;
+
+            $poi['images']->push(new PoiImage([
+                'url' => $image['attributes']['url']
+            ]));
         }
 
         return new Poi($poi);
