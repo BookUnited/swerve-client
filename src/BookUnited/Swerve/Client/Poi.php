@@ -6,6 +6,10 @@ namespace BookUnited\Swerve\Client;
  * Class Poi
  * @package BookUnited\Swerve\Client
  */
+/**
+ * Class Poi
+ * @package BookUnited\Swerve\Client
+ */
 class Poi extends Entity {
 
     /**
@@ -32,6 +36,11 @@ class Poi extends Entity {
      * @var
      */
     protected $images;
+
+    /**
+     * @var
+     */
+    protected $distance;
 
     /**
      * @return mixed
@@ -71,6 +80,14 @@ class Poi extends Entity {
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDistance()
+    {
+        return $this->distance;
     }
 
 }
