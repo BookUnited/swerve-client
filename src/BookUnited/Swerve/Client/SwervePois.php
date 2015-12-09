@@ -51,11 +51,12 @@ class SwervePois extends SwerveClient
     private function toEntity(array $attributes, array $included)
     {
         $poi = [
-            'id'            => $attributes['id'],
-            'name'          => $attributes['attributes']['name'],
-            'description'   => $attributes['attributes']['description'],
-            'address'       => $attributes['attributes']['address'],
-            'zip_code'      => $attributes['attributes']['zip_code'],
+            'id'            => array_get($attributes, 'id'),
+            'name'          => array_get($attributes, 'attributes.name'),
+            'description'   => array_get($attributes, 'attributes.description'),
+            'address'       => array_get($attributes, 'attributes.address'),
+            'zip_code'      => array_get($attributes, 'attributes.zip_code'),
+            'distance'      => array_get($attributes, 'attributes.distance'),
             'images'        => new Collection()
         ];
 
