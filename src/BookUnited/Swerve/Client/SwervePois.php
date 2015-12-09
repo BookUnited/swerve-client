@@ -45,6 +45,7 @@ class SwervePois extends SwerveClient
 
     /**
      * @param array $attributes
+     * @param array $included
      * @return Poi
      */
     private function toEntity(array $attributes, array $included)
@@ -58,8 +59,8 @@ class SwervePois extends SwerveClient
             'images'        => new Collection()
         ];
 
-        foreach(array_get($attributes, 'images.data', []) as $image) {
-            $image = $this->getInclude($included, 'image', $image['id']);
+        foreach(array_get($attributes, 'relationships.images.data', []) as $image) {
+            $image = $this->getInclude($included, 'images', $image['id']);
 
             if (!$image) continue;
 
