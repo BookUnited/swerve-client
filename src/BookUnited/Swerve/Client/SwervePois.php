@@ -32,6 +32,10 @@ class SwervePois extends SwerveClient
             $query['max'] = $options['max'];
         }
 
+        if (array_has($options, 'contains')) {
+            $query['contains'] = $options['contains'];
+        }
+
         $results = $this->get(sprintf('%s/api/v1/poi', config('swerve.api_url')), $query);
 
         $pois = new Collection();
