@@ -95,7 +95,7 @@ class Poi extends Entity implements Arrayable {
             'description'   => $this->description,
             'address'       => $this->address,
             'zip_code'      => $this->zip_code,
-            'images'        => $this->images,
+            'images'        => $this->images->toArray(),
             'distance'      => $this->distance
         ];
     }

@@ -2,11 +2,13 @@
 
 namespace BookUnited\Swerve\Client;
 
+use Illuminate\Contracts\Support\Arrayable;
+
 /**
  * Class PoiImage
  * @package BookUnited\Swerve\Client
  */
-class PoiImage extends Entity
+class PoiImage extends Entity implements Arrayable
 {
 
     /**
@@ -33,6 +35,17 @@ class PoiImage extends Entity
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'name'  => $this->name,
+            'url'   => $this->url
+        ];
     }
 
 }
