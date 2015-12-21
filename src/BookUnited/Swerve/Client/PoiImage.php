@@ -22,6 +22,16 @@ class PoiImage extends Entity implements Arrayable
     protected $name;
 
     /**
+     * @var
+     */
+    protected $width;
+
+    /**
+     * @var
+     */
+    protected $height;
+
+    /**
      * @return mixed
      */
     public function getUrl()
@@ -38,13 +48,31 @@ class PoiImage extends Entity implements Arrayable
     }
 
     /**
+     * @return mixed
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
     {
         return [
-            'name'  => $this->name,
-            'url'   => $this->url
+            'name'      => $this->name,
+            'url'       => $this->url,
+            'width'     => $this->width,
+            'height'    => $this->height
         ];
     }
 

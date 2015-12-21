@@ -13,6 +13,11 @@ class Poi extends Entity implements Arrayable {
     /**
      * @var
      */
+    protected $id;
+
+    /**
+     * @var
+     */
     protected $name;
 
     /**
@@ -39,6 +44,14 @@ class Poi extends Entity implements Arrayable {
      * @var
      */
     protected $distance;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @return mixed
@@ -88,9 +101,13 @@ class Poi extends Entity implements Arrayable {
         return $this->distance;
     }
 
+    /**
+     * @return array
+     */
     public function toArray()
     {
         return [
+            'id'            => $this->id,
             'name'          => $this->name,
             'description'   => $this->description,
             'address'       => $this->address,

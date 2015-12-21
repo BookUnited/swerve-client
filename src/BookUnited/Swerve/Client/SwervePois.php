@@ -70,8 +70,10 @@ class SwervePois extends SwerveClient
             if (!$image) continue;
 
             $poi['images']->push(new PoiImage([
-                'url'   => $image['attributes']['url'],
-                'name'  => $image['attributes']['image_name']
+                'url'       => $image['attributes']['url'],
+                'name'      => $image['attributes']['image_name'],
+                'width'     => $image['attributes']['width'],
+                'height'    => $image['attributes']['height']
             ]));
         }
 
