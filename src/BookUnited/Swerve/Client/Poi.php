@@ -2,15 +2,13 @@
 
 namespace BookUnited\Swerve\Client;
 
+use Illuminate\Contracts\Support\Arrayable;
+
 /**
  * Class Poi
  * @package BookUnited\Swerve\Client
  */
-/**
- * Class Poi
- * @package BookUnited\Swerve\Client
- */
-class Poi extends Entity {
+class Poi extends Entity implements Arrayable {
 
     /**
      * @var
@@ -88,6 +86,18 @@ class Poi extends Entity {
     public function getDistance()
     {
         return $this->distance;
+    }
+
+    public function toArray()
+    {
+        return [
+            'name'          => $this->name,
+            'description'   => $this->description,
+            'address'       => $this->address,
+            'zip_code'      => $this->zip_code,
+            'images'        => $this->images,
+            'distance'      => $this->distance
+        ];
     }
 
 }
