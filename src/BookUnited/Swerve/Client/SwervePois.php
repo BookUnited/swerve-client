@@ -28,7 +28,7 @@ class SwervePois extends SwerveClient
             $query['include'] = implode(',', $options['include']);
         }
 
-        if (array_has($options, 'max') && ctype_digit($options['max'])) {
+        if (array_has($options, 'max') && ctype_digit((string)$options['max'])) {
             $query['max'] = $options['max'];
         }
 
@@ -44,7 +44,7 @@ class SwervePois extends SwerveClient
             $pois->push($this->toEntity($attributes, array_get($results, 'included', [])));
         }
 
-        return $pois->reverse();
+        return $pois;
     }
 
     /**
