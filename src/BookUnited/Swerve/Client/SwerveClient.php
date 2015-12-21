@@ -32,14 +32,14 @@ abstract class SwerveClient
      */
     protected function get($url, array $query = [])
     {
-        $response = $this->client->get($url, [
+         $response = $this->client->get($url, [
             'headers' => [
                 'Api-Key' => config('swerve.api_key')
             ],
             'query'   => $query
         ]);
 
-        return $response->json();
+        return json_decode($response->getBody()->getContents(), true);
     }
 
 }
