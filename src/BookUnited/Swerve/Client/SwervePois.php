@@ -57,7 +57,7 @@ class SwervePois extends SwerveClient
         $poi = [
             'id'                => array_get($attributes, 'id'),
             'name'              => array_get($attributes, 'attributes.name'),
-            'short_description' => array_get($attributes, 'attributes.short_description');
+            'short_description' => array_get($attributes, 'attributes.short_description'),
             'description'       => array_get($attributes, 'attributes.description'),
             'address'           => array_get($attributes, 'attributes.address'),
             'zip_code'          => array_get($attributes, 'attributes.zip_code'),
