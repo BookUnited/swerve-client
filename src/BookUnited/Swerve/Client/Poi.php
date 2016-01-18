@@ -23,6 +23,11 @@ class Poi extends Entity implements Arrayable {
     /**
      * @var
      */
+    protected $short_description;
+
+    /**
+     * @var
+     */
     protected $description;
 
     /**
@@ -59,6 +64,14 @@ class Poi extends Entity implements Arrayable {
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShortDescription()
+    {
+        return $this->short_description;
     }
 
     /**
@@ -107,13 +120,14 @@ class Poi extends Entity implements Arrayable {
     public function toArray()
     {
         return [
-            'id'            => $this->id,
-            'name'          => $this->name,
-            'description'   => $this->description,
-            'address'       => $this->address,
-            'zip_code'      => $this->zip_code,
-            'images'        => $this->images->toArray(),
-            'distance'      => $this->distance
+            'id'                => $this->id,
+            'name'              => $this->name,
+            'short_description' => $this->short_description,
+            'description'       => $this->description,
+            'address'           => $this->address,
+            'zip_code'          => $this->zip_code,
+            'images'            => $this->images->toArray(),
+            'distance'          => $this->distance
         ];
     }
 
