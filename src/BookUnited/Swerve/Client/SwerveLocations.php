@@ -38,7 +38,9 @@ class SwerveLocations extends SwerveClient
      */
     public function pois(PoiLocation $location)
     {
-        $results = $this->get(sprintf('%s/api/v1/location/%s', config('swerve.api_url'), $location->getName()));
+        $results = $this->get(sprintf('%s/api/v1/location/%s', config('swerve.api_url'), $location->getName()), [
+            'include' => 'pois'
+        ]);
 
         $pois = new Collection();
 
