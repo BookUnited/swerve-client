@@ -46,7 +46,7 @@ class SwerveLocations extends SwerveClient
 
         foreach (array_get($results, 'included', []) as $attributes) {
             if (array_get($attributes, 'type') == 'poi') {
-                $pois->push($attributes);
+                $pois->push($this->toEntity($attributes));
             }
         }
 
@@ -55,10 +55,9 @@ class SwerveLocations extends SwerveClient
 
     /**
      * @param array $attributes
-     * @param array $included
      * @return array
      */
-    private function toEntity(array $attributes, array $included)
+    private function toEntity(array $attributes)
     {
         return [
             'id'                => array_get($attributes, 'id'),
