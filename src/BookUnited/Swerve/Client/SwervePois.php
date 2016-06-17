@@ -62,7 +62,8 @@ class SwervePois extends SwerveClient
             'address'           => array_get($attributes, 'attributes.address'),
             'zip_code'          => array_get($attributes, 'attributes.zip_code'),
             'distance'          => array_get($attributes, 'attributes.distance'),
-            'images'            => new Collection()
+            'images'            => new Collection(),
+            'poi_types'          => $this->getPoiType($attributes, $included)
         ];
 
         foreach(array_get($attributes, 'relationships.images.data', []) as $image) {
@@ -98,4 +99,29 @@ class SwervePois extends SwerveClient
         return false;
     }
 
+    /**
+     * @param $attributes
+     * @param $included
+     *
+     * @return mixed
+     */
+    private function getPoiType($attributes, $included)
+    {
+        $poiTypes = array_get($attributes, 'relationships.poiTypes.data');
+
+        $types = [];
+        foreach ($included as $include) {
+
+            if (array_get($include, 'type') != "types") continue;
+
+            foreach ($poiTypes as $poiType) {
+
+                if (array_get($poiType, 'id') != array_get($include, 'id')) continue;
+
+                array_push($types, array_get($include, 'attributes.poiType'));
+            }
+        }
+
+        return $types;
+    }
 }
