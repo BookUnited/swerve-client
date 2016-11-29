@@ -24,6 +24,10 @@ class SwervePois extends SwerveClient
             $query['with'] = implode(',', $options['with']);
         }
 
+        if (array_has($options, 'without') && is_array($options['without'])) {
+            $query['without'] = implode(',', $options['without']);
+        }
+
         if (array_has($options, 'include') && is_array($options['include'])) {
             $query['include'] = implode(',', $options['include']);
         }
