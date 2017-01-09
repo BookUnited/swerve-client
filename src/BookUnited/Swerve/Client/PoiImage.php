@@ -10,7 +10,6 @@ use Illuminate\Contracts\Support\Arrayable;
  */
 class PoiImage extends Entity implements Arrayable
 {
-
     /**
      * @var
      */
@@ -30,6 +29,16 @@ class PoiImage extends Entity implements Arrayable
      * @var
      */
     protected $height;
+
+    /**
+     * @var
+     */
+    protected $focus_x;
+
+    /**
+     * @var
+     */
+    protected $focus_y;
 
     /**
      * @return mixed
@@ -64,6 +73,22 @@ class PoiImage extends Entity implements Arrayable
     }
 
     /**
+     * @return mixed
+     */
+    public function getFocusX()
+    {
+        return $this->focus_x;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFocusY()
+    {
+        return $this->focus_y;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
@@ -72,7 +97,9 @@ class PoiImage extends Entity implements Arrayable
             'name'      => $this->name,
             'url'       => $this->url,
             'width'     => $this->width,
-            'height'    => $this->height
+            'height'    => $this->height,
+            'focus_x'   => $this->focus_x,
+            'focus_y'   => $this->focus_y,
         ];
     }
 

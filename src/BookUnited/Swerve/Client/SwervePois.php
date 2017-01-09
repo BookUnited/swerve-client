@@ -79,7 +79,9 @@ class SwervePois extends SwerveClient
                 'url'       => $image['attributes']['url'],
                 'name'      => $image['attributes']['image_name'],
                 'width'     => $image['attributes']['width'],
-                'height'    => $image['attributes']['height']
+                'height'    => $image['attributes']['height'],
+                'focus_y'   => $image['attributes']['focus_y'],
+                'focus_x'   => $image['attributes']['focus_x'],
             ]));
         }
 
