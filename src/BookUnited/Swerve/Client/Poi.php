@@ -8,8 +8,8 @@ use Illuminate\Contracts\Support\Arrayable;
  * Class Poi
  * @package BookUnited\Swerve\Client
  */
-class Poi extends Entity implements Arrayable {
-
+class Poi extends Entity implements Arrayable
+{
     /**
      * @var
      */
@@ -122,7 +122,8 @@ class Poi extends Entity implements Arrayable {
     /**
      * @return mixed
      */
-    public function getPoiTypes(){
+    public function getPoiTypes()
+    {
         return $this->poi_types;
     }
 
@@ -143,5 +144,4 @@ class Poi extends Entity implements Arrayable {
             'poi_types'         => $this->poi_types,
         ];
     }
-
 }

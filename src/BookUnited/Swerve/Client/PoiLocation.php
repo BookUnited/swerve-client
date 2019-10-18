@@ -8,8 +8,8 @@ use Illuminate\Contracts\Support\Arrayable;
  * Class PoiLocation
  * @package BookUnited\Swerve\Client
  */
-class PoiLocation extends Entity implements Arrayable {
-
+class PoiLocation extends Entity implements Arrayable
+{
     /**
      * @var
      */
@@ -58,8 +58,8 @@ class PoiLocation extends Entity implements Arrayable {
     public function toArray()
     {
         return [
-            'id'                => $this->id,
-            'name'              => $this->name
+            'id'   => $this->id,
+            'name' => $this->name,
         ];
     }
 }
