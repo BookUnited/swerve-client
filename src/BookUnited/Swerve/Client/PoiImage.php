@@ -94,13 +94,12 @@ class PoiImage extends Entity implements Arrayable
     public function toArray()
     {
         return [
-            'name'      => $this->name,
-            'url'       => $this->url,
-            'width'     => $this->width,
-            'height'    => $this->height,
-            'focus_x'   => $this->focus_x,
-            'focus_y'   => $this->focus_y,
+            'name'    => $this->name,
+            'url'     => $this->url,
+            'width'   => $this->width,
+            'height'  => $this->height,
+            'focus_x' => $this->focus_x,
+            'focus_y' => $this->focus_y,
         ];
     }
-
 }

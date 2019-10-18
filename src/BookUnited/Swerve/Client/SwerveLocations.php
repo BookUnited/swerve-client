@@ -2,7 +2,9 @@
 
 namespace BookUnited\Swerve\Client;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Config;
 
 /**
  * Class SwerveLocations
@@ -16,16 +18,16 @@ class SwerveLocations extends SwerveClient
      */
     public function find($query)
     {
-        $results = $this->get(sprintf('%s/api/v1/location', config('swerve.api_url')), [
-            'contains' => $query
+        $results = $this->get(sprintf('%s/api/v1/location', Config::get('swerve.api_url')), [
+            'contains' => $query,
         ]);
 
         $locations = new Collection();
 
-        foreach (array_get($results, 'data', []) as $attributes) {
+        foreach (Arr::get($results, 'data', []) as $attributes) {
             $locations->push(new PoiLocation([
-                'id'    => array_get($attributes, 'attributes.id'),
-                'name'  => array_get($attributes, 'attributes.name')
+                'id'   => Arr::get($attributes, 'attributes.id'),
+                'name' => Arr::get($attributes, 'attributes.name'),
             ]));
         }
 
@@ -38,14 +40,14 @@ class SwerveLocations extends SwerveClient
      */
     public function pois(PoiLocation $location)
     {
-        $results = $this->get(sprintf('%s/api/v1/location/%s', config('swerve.api_url'), $location->getName()), [
-            'include' => 'pois'
+        $results = $this->get(sprintf('%s/api/v1/location/%s', Config::get('swerve.api_url'), $location->getName()), [
+            'include' => 'pois',
         ]);
 
         $pois = new Collection();
 
-        foreach (array_get($results, 'included', []) as $attributes) {
-            if (array_get($attributes, 'type') == 'poi') {
+        foreach (Arr::get($results, 'included', []) as $attributes) {
+            if (Arr::get($attributes, 'type') == 'poi') {
                 $pois->push($this->toEntity($attributes));
             }
         }
@@ -60,14 +62,13 @@ class SwerveLocations extends SwerveClient
     private function toEntity(array $attributes)
     {
         return [
-            'id'                => array_get($attributes, 'id'),
-            'name'              => array_get($attributes, 'attributes.name'),
-            'short_description' => array_get($attributes, 'attributes.short_description'),
-            'description'       => array_get($attributes, 'attributes.description'),
-            'address'           => array_get($attributes, 'attributes.address'),
-            'zip_code'          => array_get($attributes, 'attributes.zip_code'),
-            'distance'          => array_get($attributes, 'attributes.distance')
+            'id'                => Arr::get($attributes, 'id'),
+            'name'              => Arr::get($attributes, 'attributes.name'),
+            'short_description' => Arr::get($attributes, 'attributes.short_description'),
+            'description'       => Arr::get($attributes, 'attributes.description'),
+            'address'           => Arr::get($attributes, 'attributes.address'),
+            'zip_code'          => Arr::get($attributes, 'attributes.zip_code'),
+            'distance'          => Arr::get($attributes, 'attributes.distance'),
         ];
     }
-
 }
